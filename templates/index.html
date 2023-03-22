@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <link rel = "stylesheet" type="text/css" href="{{ url_for('static', filename='index.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <div class="content">
+        <br>
+          <h1 class="text-center"><u>Fake News Detection</u></h1>
+          <h3 class="text-center">Enter the text for us to check the news for:</h3>
+          <div class="container">
+            <form action="/" method="POST">
+              <textarea name="txt" rows="6" placeholder="News" cols="100" class="area"  required></textarea>
+              <br>
+              <input type="submit" name="submit" class="button alert alert-success">
+            </form>
+            <h3 class="text-center">The Entered News is : </h3>
+
+            {{ request.form['txt'] }}
+            <br><br>
+            <h3 class="text-center">Our machine learning model found that it is :</h3>
+            {% if result == 0 %}
+            <p style="color: rgb(232, 9, 9);" class="alert result alert-danger text-center">Fake News</p>
+            {% else %}
+            <p style="color:rgb(0, 255, 4);" class="alert result alert-success text-center">True News</p>
+            {% endif  %}
+          </div>
+      </div>
+    </div>
+</body>
+</html>
