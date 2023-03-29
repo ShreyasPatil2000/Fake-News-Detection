@@ -25,3 +25,7 @@ python_Flask. Our study explores different textual properties that can be used t
 distinguish fake content from real. By using those properties, we train a combination of
 different machine learning algorithms using various ensemble methods and evaluate their
 performance on 5 real-world datasets.
+
+
+![g3](https://user-images.githubusercontent.com/55951556/228394514-65c54304-17c7-4bb9-bbed-dcf6d48dbeec.png)
+
