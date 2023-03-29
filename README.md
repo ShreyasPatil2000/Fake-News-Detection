@@ -1,5 +1,6 @@
 # Fake-News-Detection
 
+# Introduction
 The advent of the World Wide Web and the rapid adoption of social media platforms
 (such as Facebook and Twitter) paved the way for information dissemination that has
 never been witnessed in human history before. With the current usage of social media
@@ -26,5 +27,5 @@ distinguish fake content from real. By using those properties, we train a combin
 different machine learning algorithms using various ensemble methods and evaluate their
 performance on 5 real-world datasets.
 
-
+# Accuracy of Different Machine Learning Algorithms on the Dataset
 ![g3](https://user-images.githubusercontent.com/55951556/228394514-65c54304-17c7-4bb9-bbed-dcf6d48dbeec.png)
