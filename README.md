@@ -29,5 +29,11 @@ performance on 5 real-world datasets.
 
 ## Details
 
+### LDA of Fake News Title
+![Screenshot (113)](https://user-images.githubusercontent.com/55951556/228398279-a6c6f813-50ef-475c-8ffa-40f3d757edf9.png)
+
+### LDA of Real News Title
+![Screenshot (114)](https://user-images.githubusercontent.com/55951556/228398297-e76bd1fe-6d3d-45bd-98df-8579b5b327c8.png)
+
 ### Accuracy of Different Machine Learning Algorithms on the Dataset
 ![g3](https://user-images.githubusercontent.com/55951556/228394514-65c54304-17c7-4bb9-bbed-dcf6d48dbeec.png)
