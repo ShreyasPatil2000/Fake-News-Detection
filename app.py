@@ -2,10 +2,16 @@ import re
 import joblib
 import string
 import pandas as pd 
-from flask import Flask,render_template,url_for,request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__,template_folder='templates')
 model = joblib.load('model.pkl')
+# Global dictionary to store data
+data_store = {}
+
+@app.template_filter('content_present')
+def content_present(txt):
+    return bool(txt)
 
 @app.route('/')
 def index():
@@ -19,7 +25,6 @@ def about():
 def contact():
     return render_template('contactus.html')
 
-
 def wordpre(text):
     text = text.lower()
     text = re.sub('\[.*?\]', '', text)
@@ -31,16 +36,27 @@ def wordpre(text):
     text = re.sub('\w*\d\w*', '', text)
     return text
 
-@app.route('/',methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def predict():
+    result = None
+    txt = None
     if request.method == 'POST':
         txt = request.form['txt']
-        txt = wordpre(txt)
-        txt = pd.Series(txt)
-        result = model.predict(txt)
-        return render_template('index.html', result = result)
-    else:
-        return render_template('index.html', result = 'Something went wrong') 
+        data_store['txt'] = txt  
+        processed_txt = wordpre(txt)  
+        txt_series = pd.Series(processed_txt)
+        result = model.predict(txt_series)[0]  # Get the first prediction
+
+        data_store['result'] = result  
+        return redirect(url_for('result'))
+    
+    return render_template('index.html', result=None, txt=None)
+
+@app.route('/result')
+def result():
+    prediction = data_store.get('result', None)  
+    txt = data_store.get('txt', None)
+    return render_template('index.html', result=prediction, txt=txt)
 
 if(__name__ == '__main__'):
-    app.run()
+    app.run(debug=True)
