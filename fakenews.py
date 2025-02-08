@@ -100,8 +100,8 @@ pipe = Pipeline([('vect', CountVectorizer()),
 
 Logisticmodel = pipe.fit(x_train, y_train)
 prediction = Logisticmodel.predict(x_test)
-print('accuracy: {}%'.format(round(accuracy_score(y_test, prediction)*100,2)))
-Logisticmodel_accuracy = round(accuracy_score(y_test, prediction)*100,2)
+print('accuracy: {}%'.format(round(accuracy_score(y_test, prediction)*100, 2)))
+Logisticmodel_accuracy = round(accuracy_score(y_test, prediction)*100, 2)
 
 # accuracy: 86.28% of Logistic Regression model
 
