@@ -2,7 +2,8 @@ import re
 import joblib
 import string
 import pandas as pd 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for
+from fakenews import create_bar_chart
 
 app = Flask(__name__,template_folder='templates')
 model = joblib.load('model.pkl')
@@ -35,6 +36,11 @@ def wordpre(text):
     text = re.sub('\n', '', text)
     text = re.sub('\w*\d\w*', '', text)
     return text
+
+@app.route("/bar_chart")
+def bar_chart():
+    fig = create_bar_chart() 
+    return jsonify(fig.to_json())
 
 @app.route('/', methods=['GET', 'POST'])
 def predict():

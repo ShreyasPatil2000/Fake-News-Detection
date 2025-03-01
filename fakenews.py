@@ -7,7 +7,6 @@ import pandas as pd
 import seaborn as sns 
 import matplotlib.pyplot as plt 
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix
@@ -17,9 +16,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.tokenize import word_tokenize, sent_tokenize  
+import plotly.express as px
 
 def wordpre(text):
     text = text.lower()
@@ -35,12 +32,10 @@ def wordpre(text):
 #Dataset 1 
 d1 = pd.read_csv('Datasets/news.csv')
 d1['article'] = d1['title'] + d1['text']
-d1.sample(frac=1)
-d1.label[d1.label == 'REAL'] = 1
-d1.label[d1.label == 'FAKE'] = 0
-d1 = d1.loc[:,['article','label']]
-d1 = d1.dropna()
-d1['article'] = d1['article'].apply(wordpre)
+d1 = d1.sample(frac=1).copy()  # Shuffle and ensure it's a copy
+d1['label'] = d1['label'].map({'REAL': 1, 'FAKE': 0})  # Convert labels safely
+d1 = d1.loc[:, ['article', 'label']].dropna()  # Select necessary columns & drop NaNs
+d1['article'] = d1['article'].apply(wordpre)  # Apply text processing
 
 #Dataset 2
 d2_true = pd.read_csv('Datasets/True.csv')
@@ -56,8 +51,8 @@ d2['article'] = d2['article'].apply(wordpre)
 #Dataset 3
 d3_real = pd.read_csv('Datasets/politifact_fake.csv')
 d3_fake = pd.read_csv('Datasets/politifact_real.csv')
-d3_real['label']= 1
-d3_fake['label']= 0
+d3_real['label'] = 1
+d3_fake['label'] = 0
 d3 = pd.concat([d3_real, d3_fake])
 d3['article'] = d3['title']
 d3.sample(frac = 1) #Shuffle 100%
@@ -82,10 +77,15 @@ d5 = d5.dropna()
 d5['article'] = d5['article'].apply(wordpre)
 
 #Concat all the 5 datasets 
-frames = [d1, d2, d3, d4,d5]
+frames = [d1, d2, d3, d4, d5]
 d = pd.concat(frames)
 d = d.drop_duplicates()
 d = d.dropna()
+
+def create_bar_chart():
+    d['label'] = d['label'].astype(str)
+    fig = px.histogram(d, x='label', text_auto=True)
+    return fig
 
 x_train,x_test,y_train,y_test = train_test_split(d['article'], d['label'], test_size=0.2, random_state=2020)
 y_train = y_train.astype('int')
