@@ -1,5 +1,19 @@
 body {
-    background: -webkit-linear-gradient(to right, #3e5151, #decba4);
-    background: linear-gradient(to bottom, #3e5151, #decba4);
-    min-height: 100vh;
-  }
+  background: -webkit-linear-gradient(to right, #3e5151, #decba4);
+  background: linear-gradient(to bottom, #3e5151, #decba4);
+  min-height: 100vh;
+}
+
+.about {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+#bar-chart {
+  width: 50%;
+  height: 20%;
+}
