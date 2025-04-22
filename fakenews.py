@@ -16,8 +16,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
-import plotly.express as px
-from functools import lru_cache
 
 def wordpre(text):
     text = text.lower()
@@ -82,16 +80,6 @@ frames = [d1, d2, d3, d4, d5]
 d = pd.concat(frames)
 d = d.drop_duplicates()
 d = d.dropna()
-
-@lru_cache(maxsize=1)
-def create_bar_chart():
-    d['label'] = d['label'].astype(str)
-    fig = px.histogram(d, x='label', text_auto=True )
-    # Set transparent backgrounds so your page background shows through
-    fig.update_layout(
-        paper_bgcolor='rgba(0,0,0,0)',  # transparent outer background
-    )
-    return fig
 
 x_train,x_test,y_train,y_test = train_test_split(d['article'], d['label'], test_size=0.2, random_state=2020)
 y_train = y_train.astype('int')

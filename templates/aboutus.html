@@ -11,25 +11,40 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css')}}" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
   <body>
     {% include '_navbar.html' %}
     <div class="about">
-      <h2>Interactive Bar Chart</h2>
-      <div id="bar-chart"></div>
-    </div>
-    <script>
-      // Fetch Bar Chart Data
-      fetch("/bar_chart")
-        .then((response) => response.json())
-        .then((data) => {
-          let figure = JSON.parse(data); // Parse the JSON string
-          Plotly.newPlot("bar-chart", figure.data, figure.layout); // Render chart
-        })
-        .catch((error) => console.error("Error loading chart:", error));
-    </script>
+      <div class="container">
+        <div class="row">
+          <!-- Graph Image 1 -->
+          <div class="col-12 col-md-4 mb-4">
+            <div class="image-container">
+              <img src="{{ url_for('static', filename='img/barchart.png') }}" class="img-fluid" alt="Graph 1">
+              <p class="text-center">Bar Chart for Fake and True News</p>
+            </div>
+          </div>
+    
+          <!-- Graph Image 2 -->
+          <div class="col-12 col-md-4 mb-4">
+            <div class="image-container">
+              <img src="{{ url_for('static', filename='img/wordcloud.png') }}" class="img-fluid" alt="Graph 2">
+              <p class="text-center">Word Cloud for most occuring terms</p>
+            </div>
+          </div>
+    
+          <!-- Graph Image 3 -->
+          <div class="col-12 col-md-4 mb-4">
+            <div class="image-container">
+              <img src="{{ url_for('static', filename='img/result.png') }}" class="img-fluid" alt="Graph 3">
+              <p class="text-center">Results for different algorithms</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

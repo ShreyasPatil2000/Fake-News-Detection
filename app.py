@@ -4,20 +4,23 @@ import string
 import pandas as pd 
 import os
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
-from fakenews import create_bar_chart
 from flask_mail import Mail, Message
+from dotenv import load_dotenv
 
 app = Flask(__name__,template_folder='templates')
 model = joblib.load('model.pkl')
 # Global dictionary to store data
 data_store = {}
 
+load_dotenv()
+
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')   
 app.config['MAIL_USE_TLS'] = True 
-app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USE_SSL'] = False
 
 mail = Mail(app)
 
@@ -40,7 +43,7 @@ def contact():
         email = request.form.get('email')
         subject = request.form.get('subject')
         message = request.form.get('message')
-        msg = Message(subject, sender=email, recipients=[os.getenv('MAIL_USERNAME')])
+        msg = Message(subject, sender=os.getenv('MAIL_USERNAME'), recipients=[os.getenv('MAIL_USERNAME')])
         msg.body = f'''From: {name} <{email}>
         Subject: {subject}
         Message:
@@ -65,11 +68,6 @@ def wordpre(text):
     text = re.sub('\n', '', text)
     text = re.sub('\w*\d\w*', '', text)
     return text
-
-@app.route("/bar_chart")
-def bar_chart():
-    fig = create_bar_chart() 
-    return jsonify(fig.to_json())
 
 @app.route('/', methods=['GET', 'POST'])
 def predict():

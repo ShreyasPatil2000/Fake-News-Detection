@@ -1,0 +1,59 @@
+body {
+  background: -webkit-linear-gradient(to right, #3e5151, #decba4);
+  background: linear-gradient(to bottom, #3e5151, #decba4);
+  min-height: 100vh;
+}
+
+.contact {
+  margin-top: 100px;
+}
+
+.contact-form {
+  background: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.form-group label {
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px 15px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-primary {
+  padding: 10px 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
