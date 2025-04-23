@@ -1,2 +1,10 @@
 .venv/
 .env
+__pycache__/
+.ipynb_checkpoints/
+lda_fake_title.html
+lda_real_title.html
+Datasets/
+README.md
+fakenewsdetection.ipynb
+fakenews.py
